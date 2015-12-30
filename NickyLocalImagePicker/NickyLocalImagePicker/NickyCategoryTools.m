@@ -79,7 +79,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
         __block UIImage *loadImage = nil;
         [libiary assetForURL:alassetURL resultBlock:^(ALAsset *asset) {
-            loadImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+            loadImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage];
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (finishBlock){
