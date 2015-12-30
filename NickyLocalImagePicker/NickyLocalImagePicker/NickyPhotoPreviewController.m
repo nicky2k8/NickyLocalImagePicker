@@ -157,7 +157,9 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     NSIndexPath *index = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset];
     NickyPhotoAlAssetModel *model = self.photoArray[index.item];
     model.selected = !model.selected;
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
+    
+    self.selectButton.selected = model.isSelected;
     [self updateSelectionStatus];
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -182,7 +184,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
             });
         }
     }];
-    self.selectButton.selected = assetModel.isSelected;
+//    self.selectButton.selected = assetModel.isSelected;
 
     return cell;
 }
