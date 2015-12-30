@@ -79,21 +79,21 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
         __block UIImage *loadImage = nil;
         [libiary assetForURL:alassetURL resultBlock:^(ALAsset *asset) {
-            loadImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage];
+            loadImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (finishBlock){
                     finishBlock(loadImage,asset.defaultRepresentation.size);
                 }
+                
+                if (loadImage){
+                    self.image = loadImage;
+                }
             });
+            
         } failureBlock:^(NSError *error) {
             
         }];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (loadImage){
-                self.image = loadImage;
-            }
-        });
     });
 
 }
