@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FF0505071C33ADA700DB4AC3 /* NickyPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0505061C33ADA700DB4AC3 /* NickyPhotoPreviewController.m */; };
+		FFE4921E1C336B2400E0246D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE4921D1C336B2400E0246D /* main.m */; };
+		FFE492211C336B2400E0246D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE492201C336B2400E0246D /* AppDelegate.m */; };
+		FFE492241C336B2400E0246D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE492231C336B2400E0246D /* ViewController.m */; };
+		FFE492291C336B2400E0246D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE492281C336B2400E0246D /* Assets.xcassets */; };
+		FFE4922C1C336B2400E0246D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE4922A1C336B2400E0246D /* LaunchScreen.storyboard */; };
+		FFE492361C336CA000E0246D /* NickyImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE492351C336CA000E0246D /* NickyImagePickerViewController.m */; };
+		FFE492391C336DEC00E0246D /* NickyPhotoAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE492381C336DEC00E0246D /* NickyPhotoAlbumListViewController.m */; };
+		FFE4923C1C33735100E0246D /* NickyPhotoPickerBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE4923B1C33735100E0246D /* NickyPhotoPickerBaseViewController.m */; };
+		FFE4923F1C3373FA00E0246D /* NickyPhotoImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE4923E1C3373FA00E0246D /* NickyPhotoImageListViewController.m */; };
+		FFE492411C33769500E0246D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFE492401C33769500E0246D /* AssetsLibrary.framework */; };
+		FFE492441C337F3600E0246D /* NickyPhotoAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE492431C337F3600E0246D /* NickyPhotoAlbumModel.m */; };
+		FFE492471C3384FD00E0246D /* NickyCategoryTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE492461C3384FD00E0246D /* NickyCategoryTools.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FF0505051C33ADA700DB4AC3 /* NickyPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyPhotoPreviewController.h; sourceTree = "<group>"; };
+		FF0505061C33ADA700DB4AC3 /* NickyPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyPhotoPreviewController.m; sourceTree = "<group>"; };
+		FFE492191C336B2400E0246D /* NickyLocalImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NickyLocalImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE4921D1C336B2400E0246D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FFE4921F1C336B2400E0246D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FFE492201C336B2400E0246D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FFE492221C336B2400E0246D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FFE492231C336B2400E0246D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FFE492281C336B2400E0246D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FFE4922B1C336B2400E0246D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FFE4922D1C336B2400E0246D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFE492341C336CA000E0246D /* NickyImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyImagePickerViewController.h; sourceTree = "<group>"; };
+		FFE492351C336CA000E0246D /* NickyImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyImagePickerViewController.m; sourceTree = "<group>"; };
+		FFE492371C336DEC00E0246D /* NickyPhotoAlbumListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyPhotoAlbumListViewController.h; sourceTree = "<group>"; };
+		FFE492381C336DEC00E0246D /* NickyPhotoAlbumListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyPhotoAlbumListViewController.m; sourceTree = "<group>"; };
+		FFE4923A1C33735100E0246D /* NickyPhotoPickerBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyPhotoPickerBaseViewController.h; sourceTree = "<group>"; };
+		FFE4923B1C33735100E0246D /* NickyPhotoPickerBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyPhotoPickerBaseViewController.m; sourceTree = "<group>"; };
+		FFE4923D1C3373FA00E0246D /* NickyPhotoImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyPhotoImageListViewController.h; sourceTree = "<group>"; };
+		FFE4923E1C3373FA00E0246D /* NickyPhotoImageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyPhotoImageListViewController.m; sourceTree = "<group>"; };
+		FFE492401C33769500E0246D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		FFE492421C337F3600E0246D /* NickyPhotoAlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyPhotoAlbumModel.h; sourceTree = "<group>"; };
+		FFE492431C337F3600E0246D /* NickyPhotoAlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyPhotoAlbumModel.m; sourceTree = "<group>"; };
+		FFE492451C3384FD00E0246D /* NickyCategoryTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickyCategoryTools.h; sourceTree = "<group>"; };
+		FFE492461C3384FD00E0246D /* NickyCategoryTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickyCategoryTools.m; sourceTree = "<group>"; };
+		FFE492481C339F8D00E0246D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FFE492161C336B2400E0246D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE492411C33769500E0246D /* AssetsLibrary.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FFE492101C336B2400E0246D = {
+			isa = PBXGroup;
+			children = (
+				FFE492401C33769500E0246D /* AssetsLibrary.framework */,
+				FFE4921B1C336B2400E0246D /* NickyLocalImagePicker */,
+				FFE4921A1C336B2400E0246D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FFE4921A1C336B2400E0246D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFE492191C336B2400E0246D /* NickyLocalImagePicker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FFE4921B1C336B2400E0246D /* NickyLocalImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				FFE492331C336B8700E0246D /* NickyLocalImagePicker */,
+				FFE4921F1C336B2400E0246D /* AppDelegate.h */,
+				FFE492201C336B2400E0246D /* AppDelegate.m */,
+				FFE492221C336B2400E0246D /* ViewController.h */,
+				FFE492231C336B2400E0246D /* ViewController.m */,
+				FFE492281C336B2400E0246D /* Assets.xcassets */,
+				FFE4922A1C336B2400E0246D /* LaunchScreen.storyboard */,
+				FFE4922D1C336B2400E0246D /* Info.plist */,
+				FFE4921C1C336B2400E0246D /* Supporting Files */,
+			);
+			path = NickyLocalImagePicker;
+			sourceTree = "<group>";
+		};
+		FFE4921C1C336B2400E0246D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFE4921D1C336B2400E0246D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FFE492331C336B8700E0246D /* NickyLocalImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				FFE4923A1C33735100E0246D /* NickyPhotoPickerBaseViewController.h */,
+				FFE4923B1C33735100E0246D /* NickyPhotoPickerBaseViewController.m */,
+				FFE492341C336CA000E0246D /* NickyImagePickerViewController.h */,
+				FFE492351C336CA000E0246D /* NickyImagePickerViewController.m */,
+				FFE492371C336DEC00E0246D /* NickyPhotoAlbumListViewController.h */,
+				FFE492381C336DEC00E0246D /* NickyPhotoAlbumListViewController.m */,
+				FFE4923D1C3373FA00E0246D /* NickyPhotoImageListViewController.h */,
+				FFE4923E1C3373FA00E0246D /* NickyPhotoImageListViewController.m */,
+				FFE492421C337F3600E0246D /* NickyPhotoAlbumModel.h */,
+				FFE492431C337F3600E0246D /* NickyPhotoAlbumModel.m */,
+				FFE492451C3384FD00E0246D /* NickyCategoryTools.h */,
+				FFE492461C3384FD00E0246D /* NickyCategoryTools.m */,
+				FF0505051C33ADA700DB4AC3 /* NickyPhotoPreviewController.h */,
+				FF0505061C33ADA700DB4AC3 /* NickyPhotoPreviewController.m */,
+			);
+			path = NickyLocalImagePicker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FFE492181C336B2400E0246D /* NickyLocalImagePicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFE492301C336B2400E0246D /* Build configuration list for PBXNativeTarget "NickyLocalImagePicker" */;
+			buildPhases = (
+				FFE492151C336B2400E0246D /* Sources */,
+				FFE492161C336B2400E0246D /* Frameworks */,
+				FFE492171C336B2400E0246D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NickyLocalImagePicker;
+			productName = NickyLocalImagePicker;
+			productReference = FFE492191C336B2400E0246D /* NickyLocalImagePicker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FFE492111C336B2400E0246D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = com.nickyTsui;
+				TargetAttributes = {
+					FFE492181C336B2400E0246D = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = FFE492141C336B2400E0246D /* Build configuration list for PBXProject "NickyLocalImagePicker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FFE492101C336B2400E0246D;
+			productRefGroup = FFE4921A1C336B2400E0246D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FFE492181C336B2400E0246D /* NickyLocalImagePicker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FFE492171C336B2400E0246D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE4922C1C336B2400E0246D /* LaunchScreen.storyboard in Resources */,
+				FFE492291C336B2400E0246D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FFE492151C336B2400E0246D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE492241C336B2400E0246D /* ViewController.m in Sources */,
+				FFE4923F1C3373FA00E0246D /* NickyPhotoImageListViewController.m in Sources */,
+				FF0505071C33ADA700DB4AC3 /* NickyPhotoPreviewController.m in Sources */,
+				FFE4923C1C33735100E0246D /* NickyPhotoPickerBaseViewController.m in Sources */,
+				FFE492441C337F3600E0246D /* NickyPhotoAlbumModel.m in Sources */,
+				FFE492391C336DEC00E0246D /* NickyPhotoAlbumListViewController.m in Sources */,
+				FFE492211C336B2400E0246D /* AppDelegate.m in Sources */,
+				FFE492471C3384FD00E0246D /* NickyCategoryTools.m in Sources */,
+				FFE492361C336CA000E0246D /* NickyImagePickerViewController.m in Sources */,
+				FFE4921E1C336B2400E0246D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FFE4922A1C336B2400E0246D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FFE4922B1C336B2400E0246D /* Base */,
+				FFE492481C339F8D00E0246D /* zh-Hans */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FFE4922E1C336B2400E0246D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FFE4922F1C336B2400E0246D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FFE492311C336B2400E0246D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NickyLocalImagePicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xianhua.NickyLocalImagePicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FFE492321C336B2400E0246D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NickyLocalImagePicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xianhua.NickyLocalImagePicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FFE492141C336B2400E0246D /* Build configuration list for PBXProject "NickyLocalImagePicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE4922E1C336B2400E0246D /* Debug */,
+				FFE4922F1C336B2400E0246D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFE492301C336B2400E0246D /* Build configuration list for PBXNativeTarget "NickyLocalImagePicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE492311C336B2400E0246D /* Debug */,
+				FFE492321C336B2400E0246D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FFE492111C336B2400E0246D /* Project object */;
+}
