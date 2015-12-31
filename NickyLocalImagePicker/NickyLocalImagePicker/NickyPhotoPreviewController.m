@@ -10,8 +10,23 @@
 #import "NickyCategoryTools.h"
 static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier";
 
-@interface NickyPhotoPreviewCell : UICollectionViewCell
+@protocol NickyPhotoPreviewCellDelegate;
+
+@interface NickyPhotoPreviewCell : UICollectionViewCell <UIScrollViewDelegate>
+
+@property (strong,nonatomic)UIScrollView        *scrollView;
+
 @property (strong,nonatomic)UIImageView         *previewImageView;
+
+@property (strong,nonatomic)UIImage             *image;
+
+@property (weak,nonatomic)id <NickyPhotoPreviewCellDelegate> delegate;
+
+@end
+
+@protocol NickyPhotoPreviewCellDelegate <NSObject>
+
+- (void)TapHiddenPhotoView:(NickyPhotoPreviewCell*)cell;
 
 @end
 
@@ -20,13 +35,92 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        [self.contentView addSubview:self.previewImageView];
+        [self.contentView addSubview:self.scrollView];
+        [self.scrollView addSubview:self.previewImageView];
     }
     return self;
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _previewImageView.frame = self.contentView.frame;
+    _scrollView.frame = self.contentView.bounds;
+    _previewImageView.frame = self.scrollView.bounds;
+}
+
+-(void)scrollViewDidZoom:(UIScrollView *)scrollView{
+    
+    if(scrollView.zoomScale <=1) scrollView.zoomScale = 1.0f;
+    
+    CGFloat xcenter = scrollView.center.x , ycenter = scrollView.center.y;
+    
+    xcenter = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width/2 : xcenter;
+    
+    ycenter = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : ycenter;
+    [self.previewImageView setCenter:CGPointMake(xcenter, ycenter)];
+}
+
+
+
+#pragma mark - 缩放大小获取方法
+-(CGRect)zoomRectForScale:(CGFloat)scale withCenter:(CGPoint)center{
+    CGRect zoomRect;
+    //大小
+    zoomRect.size.height = [_scrollView frame].size.height/scale;
+    zoomRect.size.width = [_scrollView frame].size.width/scale;
+    //原点
+    zoomRect.origin.x = center.x - zoomRect.size.width/2;
+    zoomRect.origin.y = center.y - zoomRect.size.height/2;
+    return zoomRect;
+}
+
+
+
+- (UIScrollView *)scrollView{
+    if (!_scrollView){
+        _scrollView = [[UIScrollView alloc]init];
+        _scrollView.maximumZoomScale = 2.0;
+        _scrollView.minimumZoomScale = 1;
+        _scrollView.delegate = self;
+        _scrollView.bounces = NO;
+        _scrollView.delaysContentTouches = NO;
+    }
+    return _scrollView;
+}
+#pragma mark - 图片的点击，touch事件
+-(void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer{
+    NSLog(@"单击");
+    if (gestureRecognizer.numberOfTapsRequired == 1) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(TapHiddenPhotoView:)]){
+            [self.delegate TapHiddenPhotoView:self];
+        }
+    }
+}
+
+-(void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer{
+    NSLog(@"双击");
+    if (gestureRecognizer.numberOfTapsRequired == 2) {
+        if(_scrollView.zoomScale == 1){
+            float newScale = [_scrollView zoomScale] *2;
+            CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+            [_scrollView zoomToRect:zoomRect animated:YES];
+        }else{
+            float newScale = [_scrollView zoomScale]/2;
+            CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+            [_scrollView zoomToRect:zoomRect animated:YES];
+        }
+    }
+}
+
+-(void)handleTwoFingerTap:(UITapGestureRecognizer *)gestureRecongnizer{
+    NSLog(@"2手指操作");
+    float newScale = [_scrollView zoomScale]/2;
+    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecongnizer locationInView:gestureRecongnizer.view]];
+    [_scrollView zoomToRect:zoomRect animated:YES];
+}
+
+//2.重新确定缩放完后的缩放倍数
+-(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
+    [scrollView setZoomScale:scale+0.01 animated:NO];
+    [scrollView setZoomScale:scale animated:NO];
 }
 - (UIImageView *)previewImageView
 {
@@ -34,13 +128,33 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
         _previewImageView = [[UIImageView alloc]init];
         _previewImageView.contentMode = UIViewContentModeScaleAspectFit;
         _previewImageView.layer.masksToBounds = YES;
+        _previewImageView.userInteractionEnabled = YES;
+        
+        //添加手势
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+        UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+        
+        singleTap.numberOfTapsRequired = 1;
+        singleTap.numberOfTouchesRequired = 1;
+        doubleTap.numberOfTapsRequired = 2;//需要点两下
+        twoFingerTap.numberOfTouchesRequired = 2;//需要两个手指touch
+        
+        [_previewImageView addGestureRecognizer:singleTap];
+        [_previewImageView addGestureRecognizer:doubleTap];
+        [_previewImageView addGestureRecognizer:twoFingerTap];
+        [singleTap requireGestureRecognizerToFail:doubleTap];//如果双击了，则不响应单击事件
+        
     }
     return _previewImageView;
+}
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
+    return self.previewImageView;
 }
 
 @end
 
-@interface NickyPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface NickyPhotoPreviewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,NickyPhotoPreviewCellDelegate>
 @property (strong,nonatomic) UICollectionView                            *collectionView;
 
 @property (strong,nonatomic) UICollectionViewFlowLayout                  *collectionViewLayout;
@@ -172,7 +286,10 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     NickyPhotoPreviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NickyPreviewCellIdentifier forIndexPath:indexPath];
     NickyPhotoAlAssetModel *assetModel = self.photoArray[indexPath.item];
+    cell.delegate = self;
+    cell.scrollView.zoomScale = 1;
     [cell.previewImageView loadLibraryBigImage:assetModel.photoURL placeImage:assetModel.thumbsImage finishBlock:^(UIImage *image, NSInteger imageSize) {
+        cell.image = image;
         if (self.originalPhoto){
             NSString *titleString = [NSString stringWithFormat:@"原图(%.2lfMB)",imageSize/1024.0/1024.0];
             [self.originalButton setTitle:titleString forState:UIControlStateNormal];
@@ -184,9 +301,12 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
             });
         }
     }];
-//    self.selectButton.selected = assetModel.isSelected;
 
     return cell;
+}
+- (void)TapHiddenPhotoView:(NickyPhotoPreviewCell *)cell{
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (!self.navigationController.navigationBarHidden){
@@ -229,6 +349,8 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
         _collectionView.dataSource = self;
         [_collectionView registerClass:[NickyPhotoPreviewCell class] forCellWithReuseIdentifier:NickyPreviewCellIdentifier];
         _collectionView.pagingEnabled = YES;
+        _collectionView.delaysContentTouches = YES;
+//        _collectionView.canCancelContentTouches = NO;
     }
     return _collectionView;
 }
