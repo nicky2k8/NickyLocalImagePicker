@@ -51,7 +51,6 @@
     return _attributeString;
 }
 - (void)refreshString{
-//    self.attributeString = [[NSMutableAttributedString alloc]init];
     NSAttributedString *attributeAlbumName = [[NSAttributedString alloc]initWithString:self.albumName attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:14]}];
     [self.attributeString appendAttributedString:attributeAlbumName];
     
@@ -64,10 +63,12 @@
     
     self.albumNameLabel.attributedText = self.attributeString;
 }
+#pragma mark 设置完相册名字后刷新label文字
 - (void)setAlbumName:(NSString *)albumName{
     _albumName = [albumName copy];
     [self refreshString];
 }
+#pragma mark 设置完相册数量后刷新label文字
 - (void)setAlbumCount:(NSString *)albumCount{
     _albumCount = [albumCount copy];
     [self refreshString];
@@ -106,6 +107,8 @@
     [super viewDidLoad];
     self.title = @"照片";
     [self.view addSubview:self.tableView];
+    
+    /** 获取相册列表 */
     [self loadAlbumList];
     // Do any additional setup after loading the view.
 }
@@ -116,20 +119,24 @@
         if (group) {
             
             NickyPhotoAlbumModel *model = [[NickyPhotoAlbumModel alloc]init];
-            model.thumbImageData = UIImageJPEGRepresentation([UIImage imageWithCGImage:group.posterImage], .9);
-            model.albumName = [[group valueForProperty:ALAssetsGroupPropertyName] mutableCopy];
-            model.albumCount = [group numberOfAssets];
+            model.thumbImageData = UIImageJPEGRepresentation([UIImage imageWithCGImage:group.posterImage], .9);  //将相册的封面图 存进model
+            model.albumName = [[group valueForProperty:ALAssetsGroupPropertyName] mutableCopy]; //相册的名称
+            model.albumCount = [group numberOfAssets]; //相册内元素的数量
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 if ([[result valueForProperty:ALAssetPropertyType]isEqualToString:ALAssetTypePhoto]){
                     NickyPhotoAlAssetModel *alasetModel = [[NickyPhotoAlAssetModel alloc]init];
-                    alasetModel.photoURL = [result valueForProperty:ALAssetPropertyAssetURL];
-                    [model.photoArray addObject:alasetModel];
+                    /**
+                     *  将相册内,相片的url放到相片元素的url中(后面获取相片内容需要用到)
+                     *  在setPhotoURL方法中,通过url获取相片的asset对像,并将相片的封面放置到model中缓存起来
+                     *  避免加载过慢
+                     */
+                    alasetModel.photoURL = [result valueForProperty:ALAssetPropertyAssetURL];                     [model.photoArray addObject:alasetModel]; // 加入到相片数组当中
                 }
             }];
             
             if (self.albumListArray.count){
                 NickyPhotoAlbumModel *firstModel = self.albumListArray[0];
-                if (firstModel.albumCount<model.albumCount){
+                if (firstModel.albumCount<model.albumCount){ //排序,相册里相片数量越多,则越在前面
                     [self.albumListArray insertObject:model atIndex:0];
                 }
                 else{
@@ -175,7 +182,9 @@
     }
     cell.separatorInset = UIEdgeInsetsMake(0, AlbumCellHeight, 0, 0);
     NickyPhotoAlbumModel *model = self.albumListArray[indexPath.row];
+    // 设置相册封面图
     cell.albumThumbImageView.image = [UIImage imageWithData:model.thumbImageData];
+    // 设置相册名称和数量
     [cell setAlbumName:model.albumName albumCount:[NSString stringWithFormat:@"(%zd)",model.albumCount]];
     
     return cell;

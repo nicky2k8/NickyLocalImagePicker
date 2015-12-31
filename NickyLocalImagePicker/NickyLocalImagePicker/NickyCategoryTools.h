@@ -20,10 +20,24 @@ typedef void(^NickyBigPhotoLoadFinish)(UIImage *image , NSInteger imageSize);
 
 
 @interface UIImage (NickyAddition)
+/**
+ *  通过颜色创建image对象
+ *
+ *  @param color 颜色
+ *
+ *  @return UIImage对象
+ */
 + (UIImage*)createImageWithColor:(UIColor*)color;
 
 @end
 
 @interface UIImageView (NickyAddition)
+/**
+ *  通过图片url加载大图(多线程加载)
+ *
+ *  @param alassetURL  图片在相册的url
+ *  @param placeImage  占位图
+ *  @param finishBlock 完成后回调的block
+ */
 - (void)loadLibraryBigImage:(NSURL *)alassetURL placeImage:(UIImage *)placeImage finishBlock:(NickyBigPhotoLoadFinish)finishBlock;
 @end

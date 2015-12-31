@@ -53,11 +53,13 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 - (void)layoutSubviews{
     [super layoutSubviews];
     _scrollView.frame = self.contentView.bounds;
-    
+    /** 设置imageview的frame */
     self.previewImageView.frame = [self calFrame:self.previewImageView.image];
 }
+#pragma mark 设置大图
 - (void)setImage:(UIImage *)image{
     _image = image;
+    /** 设置imageview的frame */
     self.previewImageView.frame = [self calFrame:image];
 }
 -(CGRect)calFrame:(UIImage *)targetImage{
@@ -134,10 +136,8 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 #pragma mark - 缩放大小获取方法
 -(CGRect)zoomRectForScale:(CGFloat)scale withCenter:(CGPoint)center{
     CGRect zoomRect;
-    //大小
     zoomRect.size.height = [_scrollView frame].size.height/scale;
     zoomRect.size.width = [_scrollView frame].size.width/scale;
-    //原点
     zoomRect.origin.x = center.x - zoomRect.size.width/2;
     zoomRect.origin.y = center.y - zoomRect.size.height/2;
     return zoomRect;
@@ -279,10 +279,10 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
             ALAssetsLibrary *library = [[ALAssetsLibrary alloc]init];
             [library assetForURL:assetModel.photoURL resultBlock:^(ALAsset *asset) {
                 i++;
-                if (self.originalPhoto){
+                if (self.originalPhoto){ //使用原图
                     [callbackArray addObject:[UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage]];
                 }
-                else{
+                else{ //使用压缩图
                     [callbackArray addObject:[UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage]];
                 }
                 if (i==(self.selectedArray.count)){
@@ -303,6 +303,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     });
 
 }
+#pragma mark 更新 状态
 - (void)updateSelectionStatus{
     self.selectedArray = [[NSMutableArray alloc]init];
     BOOL isSelected = NO;
@@ -317,9 +318,11 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     self.finishButton.enabled = isSelected;
     [self.finishButton setTitle:[NSString stringWithFormat:@"完成( %zd )",selectedNumber] forState:UIControlStateNormal];
 }
+#pragma mark 使用原图
 - (void)useOriginalAction:(UIButton *)button{
     self.originalPhoto = !self.originalPhoto;
 }
+#pragma mark 设置原图
 - (void)setOriginalPhoto:(BOOL)originalPhoto{
     _originalPhoto = originalPhoto;
     [self.collectionView reloadData];
@@ -340,13 +343,11 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     NSIndexPath *index = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset];
     NickyPhotoAlAssetModel *model = self.photoArray[index.item];
     model.selected = !model.selected;
-//    [self.collectionView reloadData];
     
     self.selectButton.selected = model.isSelected;
     [self updateSelectionStatus];
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
     NSIndexPath *index = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset];
     NickyPhotoAlAssetModel *model = self.photoArray[index.item];
     self.currentPage = index.item;
@@ -359,7 +360,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     cell.scrollView.zoomScale = 1;
     [cell.previewImageView loadLibraryBigImage:assetModel.photoURL placeImage:assetModel.thumbsImage finishBlock:^(UIImage *image, NSInteger imageSize) {
         cell.image = image;
-        if (self.originalPhoto){
+        if (self.originalPhoto){ //选择原图模式
             NSString *titleString = [NSString stringWithFormat:@"原图(%.2lfMB)",imageSize/1024.0/1024.0];
             [self.originalButton setTitle:titleString forState:UIControlStateNormal];
             CGFloat width = [titleString boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.originalButton.titleLabel.font} context:NULL].size.width;
@@ -373,6 +374,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 
     return cell;
 }
+#pragma mark 单击图片时触发
 - (void)TapHiddenPhotoView:(NickyPhotoPreviewCell *)cell{
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
@@ -418,8 +420,6 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
         _collectionView.dataSource = self;
         [_collectionView registerClass:[NickyPhotoPreviewCell class] forCellWithReuseIdentifier:NickyPreviewCellIdentifier];
         _collectionView.pagingEnabled = YES;
-        _collectionView.delaysContentTouches = YES;
-//        _collectionView.canCancelContentTouches = NO;
     }
     return _collectionView;
 }

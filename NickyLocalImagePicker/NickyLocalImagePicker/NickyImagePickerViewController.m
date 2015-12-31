@@ -21,7 +21,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    /** 设置导航栏样式 */
     [self settingNavigationBar];
     
     // Do any additional setup after loading the view.

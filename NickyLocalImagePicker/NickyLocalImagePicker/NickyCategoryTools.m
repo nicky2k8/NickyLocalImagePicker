@@ -85,7 +85,6 @@
                 if (finishBlock){
                     finishBlock(loadImage,asset.defaultRepresentation.size);
                 }
-                
                 if (loadImage){
                     self.image = loadImage;
                 }
