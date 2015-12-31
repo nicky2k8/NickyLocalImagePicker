@@ -8,6 +8,7 @@
 
 #import "NickyPhotoPreviewController.h"
 #import "NickyCategoryTools.h"
+
 static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier";
 
 @protocol NickyPhotoPreviewCellDelegate;
@@ -20,7 +21,16 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 
 @property (strong,nonatomic)UIImage             *image;
 
+
 @property (weak,nonatomic)id <NickyPhotoPreviewCellDelegate> delegate;
+
+
+
+/** bounds */
+@property (nonatomic,assign) CGRect screenBounds;
+
+/** center*/
+@property (nonatomic,assign) CGPoint screenCenter;
 
 @end
 
@@ -43,7 +53,68 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 - (void)layoutSubviews{
     [super layoutSubviews];
     _scrollView.frame = self.contentView.bounds;
-    _previewImageView.frame = self.scrollView.bounds;
+    
+    self.previewImageView.frame = [self calFrame:self.previewImageView.image];
+}
+- (void)setImage:(UIImage *)image{
+    _image = image;
+    self.previewImageView.frame = [self calFrame:image];
+}
+-(CGRect)calFrame:(UIImage *)targetImage{
+    CGFloat radio = targetImage.size.width/ScreenWidth;
+    CGSize size = CGSizeMake(targetImage.size.width/radio, targetImage.size.height/radio);
+    
+    CGFloat w = size.width;
+    CGFloat h = size.height;
+    
+    CGRect superFrame = [UIScreen mainScreen].bounds;
+    CGFloat superW =superFrame.size.width ;
+    CGFloat superH =superFrame.size.height;
+    
+    CGFloat calW = superW;
+    CGFloat calH = superW;
+    
+    if (w>=h) {
+        if(w> superW){
+            CGFloat scale = superW / w;
+            calW = w * scale;
+            calH = h * scale;
+            
+        }else if(w <= superW){
+            
+            calW = w;
+            calH = h;
+        }
+        
+    }else if(w<h){
+        
+        CGFloat scale1 = superH / h;
+        CGFloat scale2 = superW / w;
+        
+        BOOL isFat = w * scale1 > superW;
+        
+        CGFloat scale =isFat ? scale2 : scale1;
+        
+        if(h> superH){
+            calW = w * scale;
+            calH = h * scale;
+            
+        }else if(h <= superH){
+            if(w>superW){
+                calW = w * scale;
+                calH = h * scale;
+            }else{
+                calW = w;
+                calH = h;
+            }
+            
+        }
+    }
+    CGPoint screenCenter = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+    CGFloat x = screenCenter.x - w *.5f;
+    CGFloat y = screenCenter.y - h * .5f;
+    CGRect frame = (CGRect){CGPointMake(x, y),CGSizeMake(w, h)};
+    return frame;
 }
 
 -(void)scrollViewDidZoom:(UIScrollView *)scrollView{
@@ -80,14 +151,14 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
         _scrollView.maximumZoomScale = 2.0;
         _scrollView.minimumZoomScale = 1;
         _scrollView.delegate = self;
-        _scrollView.bounces = NO;
-        _scrollView.delaysContentTouches = NO;
+        _scrollView.bounces = YES;
+        _scrollView.delaysContentTouches = YES;
+        _scrollView.contentMode = UIViewContentModeScaleToFill;
     }
     return _scrollView;
 }
 #pragma mark - 图片的点击，touch事件
 -(void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer{
-    NSLog(@"单击");
     if (gestureRecognizer.numberOfTapsRequired == 1) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(TapHiddenPhotoView:)]){
             [self.delegate TapHiddenPhotoView:self];
@@ -96,7 +167,6 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 }
 
 -(void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer{
-    NSLog(@"双击");
     if (gestureRecognizer.numberOfTapsRequired == 2) {
         if(_scrollView.zoomScale == 1){
             float newScale = [_scrollView zoomScale] *2;
@@ -111,7 +181,6 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 }
 
 -(void)handleTwoFingerTap:(UITapGestureRecognizer *)gestureRecongnizer{
-    NSLog(@"2手指操作");
     float newScale = [_scrollView zoomScale]/2;
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecongnizer locationInView:gestureRecongnizer.view]];
     [_scrollView zoomToRect:zoomRect animated:YES];
@@ -137,13 +206,13 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
         
         singleTap.numberOfTapsRequired = 1;
         singleTap.numberOfTouchesRequired = 1;
-        doubleTap.numberOfTapsRequired = 2;//需要点两下
-        twoFingerTap.numberOfTouchesRequired = 2;//需要两个手指touch
+        doubleTap.numberOfTapsRequired = 2;
+        twoFingerTap.numberOfTouchesRequired = 2;
         
         [_previewImageView addGestureRecognizer:singleTap];
         [_previewImageView addGestureRecognizer:doubleTap];
         [_previewImageView addGestureRecognizer:twoFingerTap];
-        [singleTap requireGestureRecognizerToFail:doubleTap];//如果双击了，则不响应单击事件
+        [singleTap requireGestureRecognizerToFail:doubleTap];
         
     }
     return _previewImageView;

@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "NickyImagePickerViewController.h"
 @interface ViewController ()<NickyImagePickerDelegate>
-
 @end
 
 @implementation ViewController
