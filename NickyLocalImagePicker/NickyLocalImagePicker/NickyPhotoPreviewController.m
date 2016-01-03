@@ -52,15 +52,20 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _scrollView.frame = self.contentView.bounds;
-    /** 设置imageview的frame */
-    self.previewImageView.frame = [self calFrame:self.previewImageView.image];
+    [UIView animateWithDuration:.2 animations:^{
+        _scrollView.frame = self.contentView.bounds;
+        /** 设置imageview的frame */
+        self.previewImageView.frame = [self calFrame:self.previewImageView.image];
+    }];
 }
 #pragma mark 设置大图
 - (void)setImage:(UIImage *)image{
     _image = image;
-    /** 设置imageview的frame */
-    self.previewImageView.frame = [self calFrame:image];
+    [UIView animateWithDuration:.2 animations:^{
+        /** 设置imageview的frame */
+        self.previewImageView.frame = [self calFrame:image];
+        
+    }];
 }
 -(CGRect)calFrame:(UIImage *)targetImage{
     CGFloat radio = targetImage.size.width/ScreenWidth;
@@ -148,7 +153,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 - (UIScrollView *)scrollView{
     if (!_scrollView){
         _scrollView = [[UIScrollView alloc]init];
-        _scrollView.maximumZoomScale = 2.0;
+        _scrollView.maximumZoomScale = 3.0;
         _scrollView.minimumZoomScale = 1;
         _scrollView.delegate = self;
         _scrollView.bounces = YES;
@@ -359,6 +364,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     cell.delegate = self;
     cell.scrollView.zoomScale = 1;
     [cell.previewImageView loadLibraryBigImage:assetModel.photoURL placeImage:assetModel.thumbsImage finishBlock:^(UIImage *image, NSInteger imageSize) {
+        // 把大图的image传递过去触发修改imageview frame的方法
         cell.image = image;
         if (self.originalPhoto){ //选择原图模式
             NSString *titleString = [NSString stringWithFormat:@"原图(%.2lfMB)",imageSize/1024.0/1024.0];
