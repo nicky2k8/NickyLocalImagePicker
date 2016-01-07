@@ -116,6 +116,7 @@ static NSString *const photoCellIdentifier = @"photoCellIdentifier";
 }
 - (void)previewAction:(UIButton *)button{
     NickyPhotoPreviewController *previewController = [[NickyPhotoPreviewController alloc]init];
+    previewController.selectedMode = YES;
     previewController.photoArray = self.selectedArray;
     [self.naviController pushViewController:previewController animated:YES];
 }
@@ -169,6 +170,7 @@ static NSString *const photoCellIdentifier = @"photoCellIdentifier";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NickyPhotoPreviewController *previewController = [[NickyPhotoPreviewController alloc]init];
+    previewController.selectedMode = YES;
     previewController.photoArray = self.model.photoArray;
     previewController.currentPage = indexPath.item;
     [self.naviController pushViewController:previewController animated:YES];

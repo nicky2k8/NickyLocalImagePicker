@@ -265,9 +265,11 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
     if (self.currentPage){
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentPage inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
     }
-    
-    UIBarButtonItem *rightbutton = [[UIBarButtonItem alloc]initWithCustomView:self.selectButton];
-    self.navigationItem.rightBarButtonItem = rightbutton;
+    if (self.isSelectedMode){
+        UIBarButtonItem *rightbutton = [[UIBarButtonItem alloc]initWithCustomView:self.selectButton];
+        self.navigationItem.rightBarButtonItem = rightbutton;
+        [self scrollViewDidEndDecelerating:self.collectionView];
+    }
     // Do any additional setup after loading the view.
 }
 - (void)finish:(NSArray *)callBackArray{

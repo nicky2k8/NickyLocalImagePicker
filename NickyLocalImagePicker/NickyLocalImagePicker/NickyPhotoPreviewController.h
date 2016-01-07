@@ -14,4 +14,6 @@
 @property (assign,nonatomic)NSInteger                   currentPage;
 
 @property (strong,nonatomic)NSArray                     *photoArray;
+
+@property (assign,nonatomic,getter=isSelectedMode)BOOL                        selectedMode;
 @end
