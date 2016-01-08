@@ -26,11 +26,7 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 
 
 
-/** bounds */
-@property (nonatomic,assign) CGRect screenBounds;
 
-/** center*/
-@property (nonatomic,assign) CGPoint screenCenter;
 
 @end
 
