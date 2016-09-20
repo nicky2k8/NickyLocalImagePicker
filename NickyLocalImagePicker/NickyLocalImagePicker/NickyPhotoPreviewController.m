@@ -48,20 +48,23 @@ static NSString *const NickyPreviewCellIdentifier = @"NickyPreviewCellIdentifier
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [UIView animateWithDuration:.2 animations:^{
-        _scrollView.frame = self.contentView.bounds;
-        /** 设置imageview的frame */
-        self.previewImageView.frame = [self calFrame:self.previewImageView.image];
-    }];
+    
+    _scrollView.frame = self.contentView.bounds;
+    /** 设置imageview的frame */
+    self.previewImageView.frame = [self calFrame:self.previewImageView.image];
+//    [UIView animateWithDuration:.2 animations:^{
+//    }];
 }
 #pragma mark 设置大图
 - (void)setImage:(UIImage *)image{
     _image = image;
-    [UIView animateWithDuration:.2 animations:^{
-        /** 设置imageview的frame */
-        self.previewImageView.frame = [self calFrame:image];
-        
-    }];
+//    [UIView animateWithDuration:.2 animations:^{
+//        /** 设置imageview的frame */
+//        self.previewImageView.frame = [self calFrame:image];
+//        
+//    }];
+    self.previewImageView.frame = [self calFrame:image];
+
 }
 -(CGRect)calFrame:(UIImage *)targetImage{
     CGFloat radio = targetImage.size.width/ScreenWidth;
