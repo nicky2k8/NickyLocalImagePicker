@@ -1,6 +1,10 @@
 # NickyLocalImagePicker
 本地相册选择器
+<br>
+
 <img src="http://images2015.cnblogs.com/blog/746201/201512/746201-20151230175347432-1548318696.gif" />
+<br>
+
 调用方法
 
     NickyImagePickerViewController *pickerController = [[NickyImagePickerViewController alloc]init];
